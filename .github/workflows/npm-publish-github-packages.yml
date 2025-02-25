@@ -27,7 +27,8 @@ jobs:
         with:
           dotnet-version: '8.x'
           source-url: https://nuget.pkg.github.com/kentem-ta-masuko/index.json
-
+          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          
       # ビルド
       - name: Build with dotnet
         run: dotnet build --configuration Release
