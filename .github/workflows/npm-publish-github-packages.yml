@@ -1,0 +1,42 @@
+name: NuGet-publish
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'ClassLibrary1/SampleNuget.csproj'
+
+  # 手動実行
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+      
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.x'
+          source-url: https://nuget.pkg.github.com/kentem-ta-masuko/index.json
+
+      # ビルド
+      - name: Build with dotnet
+        run: dotnet build --configuration Release
+
+      - name: Publish NuGet
+        uses: alirezanet/publish-nuget@v3.1.0
+        with:
+          PROJECT_FILE_PATH: 'ClassLibrary1/SampleNuget.csproj'
+          VERSION_REGEX: ^\s*<Version>(.*)<\/Version>\s*$
+          TAG_COMMIT: false
+          NUGET_SOURCE: https://nuget.pkg.github.com/
+          NUGET_KEY: ${{secrets.GITHUB_TOKEN}}
