@@ -35,10 +35,6 @@ jobs:
         run: dotnet build --configuration Release
 
       - name: Publish NuGet
-        uses: alirezanet/publish-nuget@v3.1.0
-        with:
-          PROJECT_FILE_PATH: 'ClassLibrary1/SampleNuget.csproj'
-          VERSION_REGEX: ^\s*<Version>(.*)<\/Version>\s*$
-          TAG_COMMIT: false
-          NUGET_SOURCE: https://nuget.pkg.github.com/
-          NUGET_KEY: ${{secrets.GITHUB_TOKEN}}
+        run: dotnet nuget push ClassLibrary1/bin/Release/SampleNuget.*.nupkg --source "github" --api-key ${{secrets.GITHUB_TOKEN}}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
