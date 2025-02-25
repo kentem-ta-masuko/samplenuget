@@ -27,6 +27,7 @@ jobs:
         with:
           dotnet-version: '8.x'
           source-url: https://nuget.pkg.github.com/kentem-ta-masuko/index.json
+        env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
           
       # ビルド
@@ -39,5 +40,5 @@ jobs:
           PROJECT_FILE_PATH: 'ClassLibrary1/SampleNuget.csproj'
           VERSION_REGEX: ^\s*<Version>(.*)<\/Version>\s*$
           TAG_COMMIT: false
-          NUGET_SOURCE: https://nuget.pkg.github.com/
+          NUGET_SOURCE: https://nuget.pkg.github.com/kentem-ta-masuko/index.json
           NUGET_KEY: ${{secrets.GITHUB_TOKEN}}
