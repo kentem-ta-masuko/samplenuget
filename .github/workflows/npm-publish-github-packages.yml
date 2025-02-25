@@ -30,12 +30,6 @@ jobs:
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-      - name: Add GitHub Packages source
-        run: |
-          dotnet nuget add source --username kentem-ta-masuko --password ${{ secrets.GITHUB_TOKEN }} \
-            --store-password-in-clear-text \
-            --name github "https://nuget.pkg.github.com/kentem-ta-masuko/index.json"
-            
       # ビルド
       - name: Build with dotnet
         run: dotnet build --configuration Release
@@ -46,5 +40,5 @@ jobs:
           PROJECT_FILE_PATH: 'ClassLibrary1/SampleNuget.csproj'
           VERSION_REGEX: ^\s*<Version>(.*)<\/Version>\s*$
           TAG_COMMIT: false
-          NUGET_SOURCE: https://nuget.pkg.github.com/kentem-ta-masuko/index.json
+          NUGET_SOURCE: https://nuget.pkg.github.com/
           NUGET_KEY: ${{secrets.GITHUB_TOKEN}}
