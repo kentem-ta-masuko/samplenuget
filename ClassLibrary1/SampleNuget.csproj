@@ -8,6 +8,7 @@
     <AssemblyOriginatorKeyFile>SampleNuget.snk</AssemblyOriginatorKeyFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>サンプル</Title>
+    <FileVersion>1.0.0</FileVersion>
   </PropertyGroup>
 
 </Project>
