@@ -24,14 +24,14 @@ jobs:
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '8.x'
 
-      # ビルド
       - name: Build with dotnet
         run: dotnet build --configuration Release
 
+      - name: Pack NuGet Package
+        run: dotnet pack ClassLibrary1/SampleNuget.csproj -c Release -o ./dist
+
       - name: Publish NuGet
-        run: dotnet nuget push ClassLibrary1/bin/Release/SampleNuget.*.nupkg --source "github" --api-key ${{secrets.GITHUB_TOKEN}}
+        run: dotnet nuget push dist/*.nupkg --source "github" --api-key ${{secrets.GITHUB_TOKEN}} --skip-duplicate
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
