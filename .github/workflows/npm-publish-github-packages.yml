@@ -31,6 +31,6 @@ jobs:
         run: dotnet pack ClassLibrary1/SampleNuget.csproj -c Release -o ./dist
 
       - name: Publish NuGet
-        run: dotnet nuget push dist/*.nupkg --source https://nuget.pkg.github.com/ks-kentem/index.json --api-key ${{secrets.GITHUB_TOKEN}} --skip-duplicate
+        run: dotnet nuget push dist/*.nupkg --source https://nuget.pkg.github.com/kentem-ta-masuko/index.json --api-key ${{secrets.GITHUB_TOKEN}} --skip-duplicate
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
